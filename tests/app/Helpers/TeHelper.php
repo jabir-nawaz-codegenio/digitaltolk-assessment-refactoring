@@ -62,5 +62,33 @@ class TeHelper
 
     }
 
+    // Test cases for 'willExpireAt' function, we can use PHPUnit library for unit testing as well
+    public static function testWillExpireAt()
+    {
+        // Test case 1 - Difference less than or equal to 90 hours
+        $due_time = '2023-07-24 12:00:00';
+        $created_at = '2023-07-24 10:00:00';
+        $expected = '2023-07-24 12:00:00';
+
+        $result = willExpireAt($due_time, $created_at);
+        echo ($result === $expected) ? "Test case 1 passed\n" : "Test case 1 failed\n";
+
+        // Test case 2 - Difference between 24 and 72 hours
+        $due_time = '2023-07-24 12:00:00';
+        $created_at = '2023-07-23 10:00:00';
+        $expected = '2023-07-24 02:00:00';
+
+        $result = willExpireAt($due_time, $created_at);
+        echo ($result === $expected) ? "Test case 2 passed\n" : "Test case 2 failed\n";
+
+        // Test case 3 - Difference greater than 72 hours
+        $due_time = '2023-07-27 12:00:00';
+        $created_at = '2023-07-23 10:00:00';
+        $expected = '2023-07-25 12:00:00';
+
+        $result = willExpireAt($due_time, $created_at);
+        echo ($result === $expected) ? "Test case 3 passed\n" : "Test case 3 failed\n";
+    }
+
 }
 
